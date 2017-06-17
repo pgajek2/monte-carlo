@@ -184,56 +184,28 @@ public class Controller
 	
 	public void count(int a,boolean b)
 	{
-		int[][] apt = new int[this.n][this.m]; 
-		int[][] previous = new int[n][m];
-		
+		int pom = 0;
+		int previous = 0; 
 		for(int i=0;i<n;i++)
 		 {
 			 for(int j=0;j<m;j++)
 			 {
-				 	if(energia[i][j]!=0)
-				 	{
-					 	previous[i][j] = board[i][j];
-						Random generator = new Random();
-						int rand = generator.nextInt(a)+1;
-						this.board[i][j] = rand;
-						if(energia[i][j]!=0)
-						 {
-							apt[i][j] = moore(i,j,b);
-						 	if(apt[i][j]<energia[i][j])
-							{
-								energia[i][j] = apt[i][j];
-							}
-							else
-							{
-								board[i][j] = previous[i][j];
-							}
-						 }
-				 	}
-			 }
-		 }
-		
-		/*for(int i=0;i<n;i++)
-		{
-			 for(int j=0;j<m;j++)
-			 {
-				 if(energia[i][j]!=0)
-				 {
-					apt[i][j] = moore(i,j,b);
-				 	if(apt[i][j]<energia[i][j])
+				 	previous = board[i][j];
+					Random generator = new Random();
+					int rand = generator.nextInt(a)+1;
+					this.board[i][j] = rand;
+					pom = moore(i,j,b);
+					if(pom <=energia[i][j])
 					{
-						energia[i][j] = apt[i][j];
+						energia[i][j] = pom;
 					}
 					else
 					{
-						board[i][j] = previous[i][j];
+						board[i][j] = previous;
 					}
-				 }
+					energia[i][j] = moore(i,j,b);
 			 }
-		 }*/
+		 }
 	 }
-
-
-
 
 }
